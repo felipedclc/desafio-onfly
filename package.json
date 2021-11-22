@@ -1,0 +1,35 @@
+{
+  "name": "desafio-onfly",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "db:reset": "npx sequelize-cli db:drop && npx sequelize-cli db:create && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all",
+    "start": "node src/api/server.js",
+    "drop": "npx sequelize-cli db:drop $",
+    "seed": "npx sequelize-cli db:seed:all $",
+    "dev": "nodemon src/api/server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "eslint-init": "^0.1.12",
+    "express": "^4.17.1",
+    "express-rescue": "^1.1.31",
+    "mysql2": "^2.3.3",
+    "sequelize": "6.3.4"
+  },
+  "devDependencies": {
+    "eslint": "^7.32.0",
+    "eslint-config-trybe-backend": "1.0.3",
+    "eslint-plugin-import": "^2.25.2",
+    "joi": "^17.4.2",
+    "jsonwebtoken": "^8.5.1",
+    "nodemon": "^2.0.15",
+    "sequelize-cli": "^6.3.0"
+  }
+}
