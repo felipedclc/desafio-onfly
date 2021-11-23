@@ -9,7 +9,7 @@ const jwtConfig = {
 };
 
 const geneateToken = (user) => {
-    const { password: { _, ...userWithoutPassword } } = user;
+    const { password: _, ...userWithoutPassword } = user;
     return jwt.sign(userWithoutPassword, JWT_SECRET, jwtConfig);
 };
 

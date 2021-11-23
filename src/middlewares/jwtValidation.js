@@ -10,7 +10,9 @@ const jwtValidation = rescue(async (req, res, next) => {
 
     if (!token) return res.status(401).json({ message: 'Token not found' });
 
-    const { dataValues: { email } } = jwt.verify(token, JWT_SECRET);
+    const { email } = jwt.verify(token, JWT_SECRET);
+    // console.log('decode: ', email);
+
     const user = await User.findOne({ where: { email } });
 
     if (!user) return res.status(401).json({ message: 'Expired or invalid token' });

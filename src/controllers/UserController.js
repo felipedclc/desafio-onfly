@@ -19,7 +19,8 @@ const create = [
             return res.status(409).json(user.error);
         }
 
-        const token = geneateToken(user);
+        // console.log('userController: ', user.dataValues);
+        const token = geneateToken(user.dataValues);
 
         return res.status(201).json({ token });
     }),
@@ -32,8 +33,7 @@ const findAll = rescue(async (_req, res) => {
 
 const findById = rescue(async (req, res) => {
     const { id } = req.params;
-    const user = User.findOne({ where: { id } });
-    console.log(user);
+    const user = await User.findOne({ where: { id } });
     if (!user) {
         return res.status(404).json({ message: 'User not found' });
     }
