@@ -18,6 +18,7 @@ expenseRouter.post('/', jwtValidation, controller.expenseController.create);
 expenseRouter.get('/userId/:id', jwtValidation, controller.expenseController.findByUserId);
 expenseRouter.get('/userEmail', jwtValidation, controller.expenseController.findByUserEmail);
 expenseRouter.put('/:id', jwtValidation, controller.expenseController.update);
+expenseRouter.delete('/:id', jwtValidation, controller.expenseController.destroy);
 
 module.exports = {
     userRouter,

@@ -52,9 +52,18 @@ const update = [
     }),
 ];
 
+const destroy = rescue(async (req, res) => {
+    const { id } = req.params;
+    const expense = await ExpenseService.deleteExpense(id);
+    if (expense.error) return res.status(404).json(expense.error);
+
+    return res.status(204).send();
+});
+
 module.exports = {
     create,
     update,
+    destroy,
     findByUserId,
     findByUserEmail,
 };

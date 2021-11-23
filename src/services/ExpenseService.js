@@ -26,8 +26,17 @@ const updateExpense = async (id, description, value, expenseDate) => {
     return Expense.findByPk(id);
 };
 
+const deleteExpense = async (id) => {
+    const expense = await Expense.findByPk(id);
+    if (expense === null) return { error: { message: MSG_NOT_FOUND } };
+
+    await Expense.destroy({ where: { id } });
+    return expense;
+};
+
 module.exports = {
     findByUserId,
     findByUserEmail,
     updateExpense,
+    deleteExpense,
 };
