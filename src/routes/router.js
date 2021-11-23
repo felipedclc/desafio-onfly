@@ -15,6 +15,12 @@ loginRouter.post('/', controller.userLogin);
 // rota '/expenses'
 const expenseRouter = express.Router();
 expenseRouter.post('/', middlware.jwtValidation, controller.expenseController.create);
+expenseRouter.get('/userId/:id',
+    middlware.jwtValidation,
+    controller.expenseController.findByUserId);
+expenseRouter.get('/userEmail/:email',
+    middlware.jwtValidation,
+    controller.expenseController.findByUserEmail);
 
 module.exports = {
     userRouter,

@@ -3,6 +3,7 @@ const rescue = require('express-rescue');
 const Joi = require('joi').extend(require('@joi/date'));
 const middlewares = require('../middlewares');
 const { Expense } = require('../database/models');
+const ExpenseService = require('../services/ExpenseService');
 // const dateFormat = require('../helpers/dateFormat');
 
 const create = [
@@ -19,6 +20,22 @@ const create = [
     }),
 ];
 
+const findByUserId = rescue(async (req, res) => {
+    const { id } = req.params;
+    const expenseByUserId = await ExpenseService.findByUserId(id);
+    if (expenseByUserId.error) return res.status(404).json(expenseByUserId.error);
+    return res.status(200).json(expenseByUserId);
+});
+
+const findByUserEmail = rescue(async (req, res) => {
+    const { email } = req.params;
+    const expenseByUserId = await ExpenseService.findByUserEmail(email);
+    if (expenseByUserId.error) return res.status(404).json(expenseByUserId.error);
+    return res.status(200).json(expenseByUserId);
+});
+
 module.exports = {
     create,
+    findByUserId,
+    findByUserEmail,
 };
