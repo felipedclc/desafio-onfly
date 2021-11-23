@@ -24,8 +24,12 @@ module.exports = {
       },
       expense_date: {
         allowNull: false,
-        type: Sequelize.DATE,
-      },
+        type: Sequelize.STRING,
+      }
+      /* expense_date: {
+        allowNull: false,
+        type: Sequelize.DATEONLY,
+      }, */
     });
   },
   down: async (queryInterface, _Sequelize) => {

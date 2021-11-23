@@ -27,8 +27,11 @@
 - instalar as dependências(npm install);
 
 - criar o arquivo .env com as variáveis que serão utilizadas:
--- PORT=3000
--- MYSQL_USER=root
--- MYSQL_PASSWORD=senhadb
--- HOSTNAME=127.0.0.1
--- JWT_SECRET=secretdojwt
+    - PORT=3000
+    - MYSQL_USER=root
+    - MYSQL_PASSWORD=senhadb
+    - HOSTNAME=127.0.0.1
+    - JWT_SECRET=secretdojwt
+
+- iniciar o sequelize (db, models, migrations, seeders):
+    - npm run db:reset

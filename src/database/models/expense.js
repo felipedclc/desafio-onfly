@@ -3,10 +3,11 @@ module.exports = (sequelize, DataTypes) => {
   const Expense = sequelize.define('Expense', {
     description: DataTypes.STRING,
     value: DataTypes.NUMBER,
-    expenseDate: {
+    expenseDate: DataTypes.STRING,
+    /* expenseDate: {
       type: DataTypes.DATE,
-      defaultValue: sequelize.literal('CURRENT_TIMESTAMP'),
-    },
+      defaultValue: DataTypes.NOW,
+    }, */
   },
   { timestamps: false, tableName: 'Expenses', underscored: true });
 

@@ -12,7 +12,12 @@ userRouter.get('/:id', middlware.jwtValidation, controller.userController.findBy
 const loginRouter = express.Router();
 loginRouter.post('/', controller.userLogin);
 
+// rota '/expenses'
+const expenseRouter = express.Router();
+expenseRouter.post('/', middlware.jwtValidation, controller.expenseController.create);
+
 module.exports = {
     userRouter,
     loginRouter,
+    expenseRouter,
 };

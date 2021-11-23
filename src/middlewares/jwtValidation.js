@@ -16,7 +16,8 @@ const jwtValidation = rescue(async (req, res, next) => {
     const user = await User.findOne({ where: { email } });
 
     if (!user) return res.status(401).json({ message: 'Expired or invalid token' });
-    req.user = user;
+    const { password: _, ...userWithoutPassword } = user.dataValues;
+    req.user = userWithoutPassword;
     next();
 });
 

@@ -15,11 +15,13 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@joi/date": "^2.1.0",
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
     "eslint-init": "^0.1.12",
     "express": "^4.17.1",
     "express-rescue": "^1.1.31",
+    "moment": "^2.29.1",
     "mysql2": "^2.3.3",
     "sequelize": "6.3.4"
   },
