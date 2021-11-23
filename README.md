@@ -32,6 +32,8 @@
     - MYSQL_PASSWORD=senhadb
     - HOSTNAME=127.0.0.1
     - JWT_SECRET=secretdojwt
+    - USER_EMAIL=seuemail
+    - PASSWORD_EMAIL=senhadoemail
 
 - iniciar o sequelize (db, models, migrations, seeders):
     - npm run db:reset
