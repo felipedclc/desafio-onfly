@@ -35,8 +35,26 @@ const findByUserEmail = rescue(async (req, res) => {
     return res.status(200).json(expenseByUserId);
 });
 
+const update = [
+    middlewares.validate(Joi.object({
+        description: Joi.string().not().empty().max(191).required(),
+        value: Joi.number().positive().required(),
+        expenseDate: Joi.date().format('DD/MM/YYYY').max('now').required(),
+    })),
+    rescue(async (req, res) => {
+        const { body: { description, value, expenseDate }, params: { id } } = req;
+        const expense = await ExpenseService
+            .updateExpense(id, description, value, expenseDate);
+
+        if (expense.error) return res.status(404).json(expense.error);
+
+        return res.status(200).json(expense);
+    }),
+];
+
 module.exports = {
     create,
+    update,
     findByUserId,
     findByUserEmail,
 };
