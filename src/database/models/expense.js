@@ -2,6 +2,7 @@
 module.exports = (sequelize, DataTypes) => {
   const Expense = sequelize.define('Expense', {
     description: DataTypes.STRING,
+    userId: DataTypes.INTEGER,
     value: DataTypes.NUMBER,
     expenseDate: DataTypes.STRING,
     /* expenseDate: {
@@ -13,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
 
   Expense.associate = (models) => {
     Expense.belongsTo(models.User, {
-      foreignKey: 'user_id', as: 'user',
+      foreignKey: 'userId', as: 'user',
     });
   };
   
