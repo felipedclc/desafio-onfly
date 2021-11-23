@@ -1,0 +1,176 @@
+Documentação
+
+----------
+
+Padrão dos endpoints
+
+Os endpoints seguem o padrão http://localhost:3001/entidade/. 
+Por exemplo, o endpoind em que o cadastro de um usuáiro é realizado será o http://localhost:3001/users/
+
+----------
+
+Retorno dos endpoints
+
+----------USER----------
+
+REGISTER: POST http://localhost:3001/users/
+
+body => 
+
+{
+  "fullName": "Flaviane Cunha",
+  "email": "vi@test.com",
+  "password": "1234"
+}
+
+response => 
+
+{
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiZnVsbE5hbWUiOiJGbGF2aWFuZSBDdW5oYSIsImVtYWlsIjoidmlAdGVzdC5jb20iLCJpYXQiOjE2Mzc2OTUyMDIsImV4cCI6MTYzNzcwNjAwMn0.ecaHw9n5IpzV5SBaBALReidguwjszQMCKrtCSIM0hak"
+}
+
+LOGIN: POST http://localhost:3001/login/
+
+body =>
+
+{
+  "email": "vi@test.com",
+  "password": "1234"
+}
+
+response =>
+
+{
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiZnVsbE5hbWUiOiJGbGF2aWFuZSBDdW5oYSIsImVtYWlsIjoidmlAdGVzdC5jb20iLCJpYXQiOjE2Mzc2OTUyMDIsImV4cCI6MTYzNzcwNjAwMn0.ecaHw9n5IpzV5SBaBALReidguwjszQMCKrtCSIM0hak"
+}
+
+FIND ALL: GET http://localhost:3001/users/
+
+headers => 
+key: authorization
+value: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiZnVsbE5hbWUiOiJGbGF2aWFuZSBDdW5oYSIsImVtYWlsIjoidmlAdGVzdC5jb20iLCJpYXQiOjE2Mzc2NzIzMjIsImV4cCI6MTYzNzY4MzEyMn0.e5MqdTdAGf_U6chew-13rvH4xzkC20XzIbUwnD_OByw
+
+response =>
+
+{
+    "0": {
+        "id": 1,
+        "fullName": "Felipe Cardoso",
+        "email": "felipedclc@gmail.com",
+        "password": "1234"
+    },
+    "1": {
+        "id": 2,
+        "fullName": "Fulana Pereira",
+        "email": "fulana@test.com",
+        "password": "1234"
+    },
+    "2": {
+        "id": 3,
+        "fullName": "Flaviane Cunha",
+        "email": "vi@test.com",
+        "password": "1234"
+    }
+}
+
+----------EXPENSE---------
+
+CREATE: GET http://localhost:3001/expenses/
+
+headers => 
+key: authorization
+value: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiZnVsbE5hbWUiOiJGbGF2aWFuZSBDdW5oYSIsImVtYWlsIjoidmlAdGVzdC5jb20iLCJpYXQiOjE2Mzc2NzIzMjIsImV4cCI6MTYzNzY4MzEyMn0.e5MqdTdAGf_U6chew-13rvH4xzkC20XzIbUwnD_OByw
+
+body => 
+{
+  "description": "bike full",
+  "value": "11000",
+  "expenseDate": "24/10/2019"
+}
+
+
+response =>
+
+{
+    "id": 3,
+    "description": "bike full",
+    "userId": 1,
+    "value": "11000",
+    "expenseDate": "24/10/2019"
+}
+
+FIND BY USER ID: GET http://localhost:3000/expenses/userId/id
+
+headers => 
+key: authorization
+value: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiZnVsbE5hbWUiOiJGbGF2aWFuZSBDdW5oYSIsImVtYWlsIjoidmlAdGVzdC5jb20iLCJpYXQiOjE2Mzc2NzIzMjIsImV4cCI6MTYzNzY4MzEyMn0.e5MqdTdAGf_U6chew-13rvH4xzkC20XzIbUwnD_OByw
+
+params => 3
+
+response => 
+[
+    {
+        "id": 1,
+        "description": "trip to San Diego, USA",
+        "value": "7000.00",
+        "expenseDate": "03/07/2016",
+        "user_id": 1,
+        "userId": 1
+    },
+    {
+        "id": 2,
+        "description": "trip to Lisbon, Portugal",
+        "value": "5000.00",
+        "expenseDate": "01/08/2015",
+        "user_id": 1,
+        "userId": 1
+    },
+    {
+        "id": 3,
+        "description": "bike full",
+        "value": "11000.00",
+        "expenseDate": "24/10/2019",
+        "user_id": 1,
+        "userId": 1
+    }
+]
+
+FIND BY USER EMAIL: GET http://localhost:3000/expenses/userEmail
+
+headers => 
+key: authorization
+value: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiZnVsbE5hbWUiOiJGbGF2aWFuZSBDdW5oYSIsImVtYWlsIjoidmlAdGVzdC5jb20iLCJpYXQiOjE2Mzc2NzIzMjIsImV4cCI6MTYzNzY4MzEyMn0.e5MqdTdAGf_U6chew-13rvH4xzkC20XzIbUwnD_OByw
+
+body => 
+{
+  "email": "felipedclc@gmail.com"
+}
+
+response => 
+[
+    {
+        "id": 1,
+        "description": "trip to San Diego, USA",
+        "value": "7000.00",
+        "expenseDate": "03/07/2016",
+        "user_id": 1,
+        "userId": 1
+    },
+    {
+        "id": 2,
+        "description": "trip to Lisbon, Portugal",
+        "value": "5000.00",
+        "expenseDate": "01/08/2015",
+        "user_id": 1,
+        "userId": 1
+    },
+    {
+        "id": 3,
+        "description": "bike full",
+        "value": "11000.00",
+        "expenseDate": "24/10/2019",
+        "user_id": 1,
+        "userId": 1
+    }
+]
+

@@ -1,4 +1,4 @@
-const { Expense } = require('../database/models');
+const { Expense, User } = require('../database/models');
 
 const findByUserId = async (userId) => {
     const expense = await Expense.findAll({ where: { userId } });
@@ -9,10 +9,10 @@ const findByUserId = async (userId) => {
 };
 
 const findByUserEmail = async (email) => {
-    const expense = await Expense.findAll({ where: { email } });
-
+    const { dataValues: { id } } = await User.findOne({ where: { email } });
+    const expense = await Expense.findAll({ where: { userId: id } });
+    
     if (!expense) return { error: { message: 'Expense no found' } };
-
     return expense;
 };
 

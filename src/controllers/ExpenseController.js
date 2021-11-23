@@ -4,7 +4,7 @@ const Joi = require('joi').extend(require('@joi/date'));
 const middlewares = require('../middlewares');
 const { Expense } = require('../database/models');
 const ExpenseService = require('../services/ExpenseService');
-// const dateFormat = require('../helpers/dateFormat');
+const emailTransporter = require('../helpers/emailTransporter');
 
 const create = [
     middlewares.validate(Joi.object({
@@ -13,10 +13,11 @@ const create = [
         expenseDate: Joi.date().format('DD/MM/YYYY').max('now').required(),
     })),
     rescue(async (req, res) => {
-        const { user: { id: userId }, body: { description, value, expenseDate } } = req;
-        // const date = dateFormat(expenseDate);
+        const { user: { id: userId, email }, body: { description, value, expenseDate } } = req;
+        const { body } = req;
         const expense = await Expense.create({ description, userId, value, expenseDate });
-        res.status(201).json(expense);
+        await emailTransporter(email, JSON.stringify(body));
+        return res.status(201).json(expense);
     }),
 ];
 
@@ -28,7 +29,7 @@ const findByUserId = rescue(async (req, res) => {
 });
 
 const findByUserEmail = rescue(async (req, res) => {
-    const { email } = req.params;
+    const { email } = req.body;
     const expenseByUserId = await ExpenseService.findByUserEmail(email);
     if (expenseByUserId.error) return res.status(404).json(expenseByUserId.error);
     return res.status(200).json(expenseByUserId);
