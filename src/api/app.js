@@ -12,7 +12,7 @@ app.use(cors());
 // teste api
 app.get('/ping', (_req, res) => res.status(200).json({ message: 'pong' })); 
 
-app.use('/user', routes.userRouter);
+app.use('/users', routes.userRouter);
 
 app.use(middlewares.error);
 

@@ -5,10 +5,10 @@ module.exports = (sequelize, DataTypes) => {
     email: { type: DataTypes.STRING, unique: true },
     password: DataTypes.STRING,
   }, 
-  { timestamps: false, tableName: 'expenses', underscored: true });
+  { timestamps: false, tableName: 'Users', underscored: true });
 
   Users.associate = (models) => {
-    Users.hasMany(models.Expenses, {
+    Users.hasMany(models.Expense, {
       foreignKey: 'userId',
       as: 'user',
     });

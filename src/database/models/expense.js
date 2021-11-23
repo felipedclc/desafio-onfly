@@ -8,11 +8,11 @@ module.exports = (sequelize, DataTypes) => {
       defaultValue: sequelize.literal('CURRENT_TIMESTAMP'),
     },
   },
-  { timestamps: false, tableName: 'expenses', underscored: true });
+  { timestamps: false, tableName: 'Expenses', underscored: true });
 
   Expense.associate = (models) => {
     Expense.belongsTo(models.User, {
-      foreignKey: 'userId', as: 'user',
+      foreignKey: 'user_id', as: 'user',
     });
   };
   

@@ -3,5 +3,5 @@ module.exports = (schema) => (req, _res, next) => {
 
     if (error) return next(error);
 
-    return next;
+    return next();
 };
