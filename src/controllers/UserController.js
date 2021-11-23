@@ -7,9 +7,9 @@ const { geneateToken } = require('../helpers/generateToken');
 
 const create = [
     middleware.validate(Joi.object({
-        fullName: Joi.string().required(),
+        fullName: Joi.string().not().empty().required(),
         email: Joi.string().email().required(),
-        password: Joi.string().required(),
+        password: Joi.string().not().empty().required(),
     })),
     rescue(async (req, res) => {
         const { fullName, email, password } = req.body;
